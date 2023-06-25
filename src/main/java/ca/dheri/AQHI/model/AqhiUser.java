@@ -1,20 +1,25 @@
 package ca.dheri.AQHI.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
+@Data
 @Entity
 public class AqhiUser {
 
     @Id
-    @GeneratedValue
-    private Long id;
+    private String id;
     private String name;
+    private String firstName;
+    private String lastName;
     private String email;
 
     @ElementCollection
-    private List<Location> favoriteLocations  = new ArrayList<Location>();
+    private Map<Location, Integer> favoriteLocations = new HashMap<Location, Integer>();
 
 }
