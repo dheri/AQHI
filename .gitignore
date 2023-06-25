@@ -32,3 +32,4 @@ build/
 ### VS Code ###
 .vscode/
 .mvn
+/application_default_credentials.json
