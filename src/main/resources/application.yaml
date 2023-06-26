@@ -46,6 +46,8 @@ spring:
 
 
 
+server:
+  forward-headers-strategy: FRAMEWORK
 
 logging:
   level:
