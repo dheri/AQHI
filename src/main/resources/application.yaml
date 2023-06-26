@@ -10,9 +10,9 @@ spring:
     hibernate:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-      ddl-auto: create-drop
       ddl-auto: validate
-#      ddl-auto: create
+#      ddl-auto: create-only
+
 #    database-platform: org.hibernate.dialect.H2Dialect
     database-platform: org.hibernate.dialect.MySQLDialect
   cloud:
