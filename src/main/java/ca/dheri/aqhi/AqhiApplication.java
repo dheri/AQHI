@@ -1,4 +1,4 @@
-package ca.dheri.AQHI;
+package ca.dheri.aqhi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

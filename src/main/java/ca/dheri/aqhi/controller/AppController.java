@@ -1,4 +1,4 @@
-package ca.dheri.AQHI.controller;
+package ca.dheri.aqhi.controller;
 
 
 import org.slf4j.Logger;

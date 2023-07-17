@@ -1,4 +1,4 @@
-package ca.dheri.AQHI;
+package ca.dheri.aqhi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

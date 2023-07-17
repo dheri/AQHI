@@ -1,7 +1,7 @@
-package ca.dheri.AQHI.config;
+package ca.dheri.aqhi.config;
 
-import ca.dheri.AQHI.model.AqhiUser;
-import ca.dheri.AQHI.model.AqhiUserRepository;
+import ca.dheri.aqhi.model.AqhiUser;
+import ca.dheri.aqhi.model.AqhiUserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

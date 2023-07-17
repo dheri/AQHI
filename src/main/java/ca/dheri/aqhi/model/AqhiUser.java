@@ -1,4 +1,4 @@
-package ca.dheri.AQHI.model;
+package ca.dheri.aqhi.model;
 
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
