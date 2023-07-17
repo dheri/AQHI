@@ -11,27 +11,18 @@ spring:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
       ddl-auto: validate
-#      ddl-auto: create-only
+#      ddl-auto: create
 
 #    database-platform: org.hibernate.dialect.H2Dialect
     database-platform: org.hibernate.dialect.MySQLDialect
-  cloud:
-    gcp:
-      sql:
-        enabled: true
-        username: ***REMOVED***
-        password: fooooo
-        database-name: aqhi
-        instance-connection-name: fooooo
 
   sql:
     init:
       mode: always
-
-
-  h2:
-    console:
-      enabled: true
+  datasource:
+    url: jdbc:mysql://10.0.6.15:3306/aqhi?user=***REMOVED***
+    username: ***REMOVED***
+    password: ***REMOVED***
 
 #  datasource:
 #    url: jdbc:h2:mem:mydb
@@ -40,12 +31,9 @@ spring:
 #    password: password
 #    initialization-mode: always
 
-  datasource:
-    url: jdbc:google:mysql://fooooo:northamerica-northeast2:fooooo?user=***REMOVED***
-    username: ***REMOVED***
-    password: fooooo
-
-
+  h2:
+    console:
+      enabled: true
 
 
 server:
