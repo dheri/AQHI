@@ -20,6 +20,6 @@ public class AqhiUser {
     private String email;
 
     @ElementCollection
-    private Map<Location, Integer> favoriteLocations = new HashMap<Location, Integer>();
+    private Map<String, Location> favoriteLocations = new HashMap<String, Location>();
 
 }

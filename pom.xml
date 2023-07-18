@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>ca.dheri</groupId>
-	<artifactId>AQHI</artifactId>
+	<artifactId>aqhi</artifactId>
 	<version>1.0.0</version>
 	<name>AQHI</name>
 	<description>AQHI Web app</description>
@@ -28,6 +28,13 @@
 		</dependencies>
 	</dependencyManagement>
 	<dependencies>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.15.2</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>

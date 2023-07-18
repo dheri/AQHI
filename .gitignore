@@ -33,3 +33,4 @@ build/
 .vscode/
 .mvn
 /application_default_credentials.json
+*.plantuml

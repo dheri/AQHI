@@ -26,7 +26,13 @@ class SecurityConfig {
                         .cacheControl(withDefaults())
                         .frameOptions((f) -> f.disable())
                 )
-                .csrf((csrf) -> csrf.ignoringRequestMatchers(toH2Console()))
+//                .csrf((csrf) -> csrf.ignoringRequestMatchers(toH2Console()))
+                .csrf((csrf) -> {
+                    csrf.ignoringRequestMatchers(toH2Console());
+                    csrf.ignoringRequestMatchers("/api/**");
+                })
+
+
                 .oauth2Login(withDefaults())
                 .oauth2Client(withDefaults())
                 .sessionManagement((sessionManagement) -> sessionManagement

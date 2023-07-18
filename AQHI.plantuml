@@ -1,0 +1,177 @@
+@startuml
+
+title __AQHI's Class Diagram__\n
+
+  namespace ca.dheri.aqhi {
+    class ca.dheri.aqhi.AqhiApplication {
+    }
+  }
+  
+
+  namespace ca.dheri.aqhi {
+    namespace config {
+      class ca.dheri.aqhi.config.AuthenticationEvents {
+      }
+    }
+  }
+  
+
+  namespace ca.dheri.aqhi {
+    namespace config {
+      class ca.dheri.aqhi.config.SecurityConfig {
+      }
+    }
+  }
+  
+
+  namespace ca.dheri.aqhi {
+    namespace controller {
+      class ca.dheri.aqhi.controller.ApiController {
+      }
+    }
+  }
+  
+
+  namespace ca.dheri.aqhi {
+    namespace controller {
+      class ca.dheri.aqhi.controller.AppController {
+      }
+    }
+  }
+  
+
+  namespace ca.dheri.aqhi {
+    namespace model {
+      class ca.dheri.aqhi.model.AqhiUser {
+      }
+    }
+  }
+  
+
+  namespace ca.dheri.aqhi {
+    namespace model {
+      interface ca.dheri.aqhi.model.AqhiUserRepository {
+      }
+    }
+  }
+  
+
+  namespace ca.dheri.aqhi {
+    namespace model {
+      class ca.dheri.aqhi.model.Location {
+      }
+    }
+  }
+  
+
+  namespace ca.dheri.aqhi {
+    namespace model {
+      interface ca.dheri.aqhi.model.LocationRepository {
+      }
+    }
+  }
+  
+
+  namespace ca.dheri.aqhi {
+    namespace model {
+      namespace pojo {
+        class ca.dheri.aqhi.model.pojo.AqhiResponse {
+        }
+      }
+    }
+  }
+  
+
+  namespace ca.dheri.aqhi {
+    namespace model {
+      namespace pojo {
+        class ca.dheri.aqhi.model.pojo.Feature {
+        }
+      }
+    }
+  }
+  
+
+  namespace ca.dheri.aqhi {
+    namespace model {
+      namespace pojo {
+        class ca.dheri.aqhi.model.pojo.Geometry {
+        }
+      }
+    }
+  }
+  
+
+  namespace ca.dheri.aqhi {
+    namespace model {
+      namespace pojo {
+        class ca.dheri.aqhi.model.pojo.Link {
+        }
+      }
+    }
+  }
+  
+
+  namespace ca.dheri.aqhi {
+    namespace model {
+      namespace pojo {
+        class ca.dheri.aqhi.model.pojo.Properties {
+        }
+      }
+    }
+  }
+  
+
+  namespace ca.dheri.aqhi {
+    namespace service {
+      class ca.dheri.aqhi.service.ReportService {
+      }
+    }
+  }
+  
+
+  namespace ca.dheri.aqhi {
+    namespace service {
+      class ca.dheri.aqhi.service.UserService {
+      }
+    }
+  }
+
+    namespace ca.dheri.aqhi {
+      namespace service {
+        class ca.dheri.aqhi.service.LocationService {
+        }
+      }
+    }
+
+
+  ca.dheri.aqhi.config.AuthenticationEvents o-- ca.dheri.aqhi.service.UserService
+  ca.dheri.aqhi.controller.ApiController o-- ca.dheri.aqhi.service.UserService
+  ca.dheri.aqhi.controller.AppController o-- ca.dheri.aqhi.service.UserService
+
+  ca.dheri.aqhi.controller.ApiController o-- ca.dheri.aqhi.service.ReportService
+
+
+  ca.dheri.aqhi.model.pojo.AqhiResponse --o ca.dheri.aqhi.model.pojo.Feature : features
+  ca.dheri.aqhi.model.pojo.AqhiResponse --o ca.dheri.aqhi.model.pojo.Link : links
+
+  ca.dheri.aqhi.model.pojo.Feature o-- ca.dheri.aqhi.model.pojo.Geometry : geometry
+  ca.dheri.aqhi.model.pojo.Feature o-- ca.dheri.aqhi.model.pojo.Properties : properties
+  ca.dheri.aqhi.service.UserService o-- ca.dheri.aqhi.model.AqhiUserRepository
+  ca.dheri.aqhi.service.UserService o-- ca.dheri.aqhi.model.LocationRepository
+
+  ca.dheri.aqhi.service.ReportService o-- ca.dheri.aqhi.model.LocationRepository
+  ca.dheri.aqhi.service.ReportService o-- ca.dheri.aqhi.model.AqhiUserRepository
+
+  ca.dheri.aqhi.model.AqhiUserRepository o-- ca.dheri.aqhi.model.AqhiUser
+  ca.dheri.aqhi.model.LocationRepository o-- ca.dheri.aqhi.model.Location
+  ca.dheri.aqhi.service.LocationService o-- ca.dheri.aqhi.model.LocationRepository
+  ca.dheri.aqhi.model.pojo.Properties --o ca.dheri.aqhi.service.LocationService
+
+
+right footer
+
+
+endfooter
+
+@enduml

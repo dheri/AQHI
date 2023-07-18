@@ -1,0 +1,36 @@
+@startuml
+
+title __CONTROLLER's Class Diagram__\n
+
+  namespace ca.dheri.aqhi {
+    namespace controller {
+      class ca.dheri.aqhi.controller.ApiController {
+          ~ logger : Logger
+          + deleteFavoriteLocation()
+          + getFavoriteLocation()
+          + getLocation()
+          + getReport()
+          + getUserDetails()
+          + putFavoriteLocation()
+          + tmp()
+      }
+    }
+  }
+  
+
+  namespace ca.dheri.aqhi {
+    namespace controller {
+      class ca.dheri.aqhi.controller.AppController {
+          ~ logger : Logger
+          + home()
+      }
+    }
+  }
+  
+
+  ca.dheri.aqhi.controller.ApiController o-- ca.dheri.aqhi.service.ReportService
+  ca.dheri.aqhi.controller.AppController o-- ca.dheri.aqhi.service.ReportService
+  ca.dheri.aqhi.controller.ApiController o-- ca.dheri.aqhi.service.UserService
+
+
+@enduml

@@ -2,6 +2,7 @@ package ca.dheri.aqhi.config;
 
 import ca.dheri.aqhi.model.AqhiUser;
 import ca.dheri.aqhi.model.AqhiUserRepository;
+import ca.dheri.aqhi.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class AuthenticationEvents {
     Logger logger = LoggerFactory.getLogger(AuthenticationEvents.class);
 
     @Autowired
-    AqhiUserRepository aqhiUserRepository;
+    UserService userService;
 
     @EventListener
     public void onSuccess(AuthenticationSuccessEvent success) {
@@ -25,22 +26,7 @@ public class AuthenticationEvents {
         Authentication authentication = success.getAuthentication();
 
         OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
-        aqhiUserRepository.findById(oAuth2User.getAttribute("sub")).orElseGet(() -> {
-            AqhiUser u = new AqhiUser();
-            u.setId(oAuth2User.getAttribute("sub"));
-            u.setName(oAuth2User.getAttribute("name"));
-            u.setFirstName(oAuth2User.getAttribute("given_name"));
-            u.setLastName(oAuth2User.getAttribute("family_name"));
-            u.setEmail(oAuth2User.getAttribute("email"));
-            u = aqhiUserRepository.save(u);
-            return u;
-        });
-
-//        logger.info(oAuth2User.getAttributes().toString());
-//        logger.info("authentication.isAuthenticated : " + authentication.isAuthenticated());
-//        logger.info(authentication.getAuthorities().stream().toList().toString());
-//        logger.info(authentication.getDetails().toString());
-
+        userService.save(oAuth2User);
     }
 
     @EventListener

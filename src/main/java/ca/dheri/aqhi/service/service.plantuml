@@ -1,0 +1,35 @@
+@startuml
+
+title __SERVICE's Class Diagram__\n
+
+  namespace ca.dheri.aqhi {
+    namespace service {
+      class ca.dheri.aqhi.service.ReportService {
+          + generateReport()
+      }
+    }
+  }
+  
+
+  namespace ca.dheri.aqhi {
+    namespace service {
+      class ca.dheri.aqhi.service.UserService {
+          ~ logger : Logger
+          + addFavoriteLocation()
+          + deleteFavoriteLocation()
+          + getFavoriteLocations()
+          + getUser()
+          + getUserOptional()
+          + save()
+      }
+    }
+  }
+  
+
+  ca.dheri.aqhi.service.UserService o-- ca.dheri.aqhi.model.AqhiUserRepository
+  ca.dheri.aqhi.service.UserService o-- ca.dheri.aqhi.model.LocationRepository
+
+  ca.dheri.aqhi.service.ReportService o-- ca.dheri.aqhi.model.LocationRepository
+  ca.dheri.aqhi.service.ReportService o-- ca.dheri.aqhi.model.AqhiUserRepository
+
+@enduml
