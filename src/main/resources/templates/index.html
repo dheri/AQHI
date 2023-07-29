@@ -14,10 +14,23 @@
 </head>
 <body>
 <h1>AQHI</h1>
+<div class="container authenticated" >
+    <p> Logged in as: <span id="userName" th:text="${user.name}"> </span>
+    </p>
+</div>
 
+<!--<div class="form-group col-md-8">-->
+<!--    <label  class="col-form-label">Location</label>-->
+<!--    <select  id="location" name="location" th:field="*{location.id}" >-->
+<!--        <option th:each="location : ${locations}" th:value="${location.id}" th:utext="${location.name}"/>-->
+<!--    </select>-->
+<!--</div>-->
+<div class="form-group col-md-8">
 
-<div class="container authenticated" style="display:none">
-    Logged in as: <span id="user"></span>
+<tr th:each="favoriteLocation: ${user.favoriteLocations}">
+    <td th:text="${favoriteLocation.value.id}" />
+    <td th:text="${favoriteLocation.value.name}" />
+</tr>
 </div>
 <div class="container"></div>
 

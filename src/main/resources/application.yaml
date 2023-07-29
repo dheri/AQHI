@@ -10,8 +10,9 @@ spring:
     hibernate:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-#      ddl-auto: validate
-      ddl-auto: create
+      ddl-auto: validate
+#      ddl-auto: create
+
 
 #    database-platform: org.hibernate.dialect.H2Dialect
     database-platform: org.hibernate.dialect.MySQLDialect
@@ -20,7 +21,7 @@ spring:
     init:
       mode: always
   datasource:
-    url: jdbc:mysql://10.0.6.15:3306/aqhi?user=***REMOVED***
+    url: jdbc:mysql://db.dheri.ca:3306/aqhi?user=***REMOVED***
     username: ***REMOVED***
     password: ***REMOVED***
 

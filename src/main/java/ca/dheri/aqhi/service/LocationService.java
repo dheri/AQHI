@@ -1,5 +1,6 @@
 package ca.dheri.aqhi.service;
 
+import ca.dheri.aqhi.model.Location;
 import ca.dheri.aqhi.model.pojo.AqhiResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -8,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
 @Service
 public class LocationService {
     Logger logger = LoggerFactory.getLogger(LocationService.class);
@@ -23,5 +25,15 @@ public class LocationService {
         logger.info(aqhiResponse.getFeatures().get(0).getProperties().getLocation_name_en());
         logger.info(String.valueOf(aqhiResponse.getFeatures().get(0).getProperties().getAqhi()));
         return aqhiResponse;
+    }
+
+    public AqhiResponse getLocationInfo(Location location) {
+        try {
+            return getLocationInfo(location.getId());
+        } catch (Exception e) {
+            logger.error(e.getLocalizedMessage());
+        }
+        return null;
+
     }
 }
