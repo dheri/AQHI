@@ -4,8 +4,8 @@ spring:
       client:
         registration:
           google:
-            clientId: fooooo
-            clientSecret: fooooo
+            clientId: ***REMOVED***.apps.googleusercontent.com
+            clientSecret: ***REMOVED***
   jpa:
     hibernate:
       naming:
@@ -14,9 +14,13 @@ spring:
 #      ddl-auto: create
 
 
+
 #    database-platform: org.hibernate.dialect.H2Dialect
     database-platform: org.hibernate.dialect.MySQLDialect
-
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
   sql:
     init:
       mode: always
@@ -45,3 +49,8 @@ logging:
     org:
       springframework:
         security: INFO
+
+ca:
+  aqhi:
+    url: https://api.weather.gc.ca/collections/aqhi-forecasts-realtime/items
+    default_location_id: FDQBX

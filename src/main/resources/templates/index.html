@@ -14,25 +14,52 @@
 </head>
 <body>
 <h1>AQHI</h1>
-<div class="container authenticated" >
-    <p> Logged in as: <span id="userName" th:text="${user.name}"> </span>
-    </p>
+
+<div class="container authenticated">
+    <p> Logged in as: <span id="userName" th:text="${user.name}"> </span></p>
 </div>
 
-<!--<div class="form-group col-md-8">-->
-<!--    <label  class="col-form-label">Location</label>-->
-<!--    <select  id="location" name="location" th:field="*{location.id}" >-->
-<!--        <option th:each="location : ${locations}" th:value="${location.id}" th:utext="${location.name}"/>-->
-<!--    </select>-->
-<!--</div>-->
+
+<div th:if="${ not#lists.isEmpty(locations)}">
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th colspan="2"> Favourite</th>
+        </tr>
+        <tr th:each="location : ${locations}">
+            <td th:text="${location.id}"></td>
+            <td th:text="${location.name}"></td>
+
+            <td>
+                <form action="#" th:action="@{'/api/favoriteLocation/{id}'(id=${location.id})}" th:method="put">
+                    <input type="hidden" name="_method" value="PUT"/>
+                    <button type="submit" id="submitButton"> ADD</button>
+                </form>
+            </td>
+            <td>
+                <form action="#" th:action="@{'/api/favoriteLocation/{id}'(id=${location.id})}" th:method="delete">
+                    <input type="hidden" name="_method" value="DELETE"/>
+                    <button type="submit" id="submitButton"> Remove</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<h2> Results </h2>>
 <div class="form-group col-md-8">
-
-<tr th:each="favoriteLocation: ${user.favoriteLocations}">
-    <td th:text="${favoriteLocation.value.id}" />
-    <td th:text="${favoriteLocation.value.name}" />
-</tr>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Name</th>
+        </tr>
+        <tr th:each="series: ${report.getSeries()}">
+            <td th:text="${series.getKey()}"/>
+            <td th:text="${series.findValueRange()}"/>
+        </tr>
+    </table>
 </div>
-<div class="container"></div>
 
 </body>
 </html>

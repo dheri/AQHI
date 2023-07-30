@@ -8,4 +8,6 @@ import java.util.Optional;
 public interface LocationRepository extends Repository<Location, String> {
     Optional<Location> findById(String id);
     Location save(Location entity);
+    List<Location> findAll();
+
 }

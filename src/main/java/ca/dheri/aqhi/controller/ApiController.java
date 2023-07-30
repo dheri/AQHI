@@ -1,21 +1,19 @@
 package ca.dheri.aqhi.controller;
 
-import ca.dheri.aqhi.model.AqhiUser;
 import ca.dheri.aqhi.model.Location;
-import ca.dheri.aqhi.model.pojo.AqhiResponse;
 import ca.dheri.aqhi.service.LocationService;
 import ca.dheri.aqhi.service.ReportService;
 import ca.dheri.aqhi.service.UserService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
 
@@ -27,47 +25,36 @@ public class ApiController {
     @Autowired
     UserService userService;
     @Autowired
-    ReportService reportService;
-    @Autowired
     LocationService locationService;
-    @GetMapping("/user")
-    @ResponseBody
-    public AqhiUser getUserDetails(@AuthenticationPrincipal OAuth2User principal) {
-        logger.info(principal.getAttributes().toString());
-        principal.getAttribute("sub");
-        return userService.getUser(principal.getAttribute("sub"));
-
-//        return Collections.singletonMap("name", principal.getAttribute("name"));
-    }
 
     @PutMapping("/favoriteLocation/{locationId}")
-    public String putFavoriteLocation(@PathVariable String locationId, @AuthenticationPrincipal OAuth2User principal) {
+    public ResponseEntity<Void> putFavoriteLocation(@PathVariable String locationId, @AuthenticationPrincipal OAuth2User principal) {
         logger.info("putFavoriteLocation called");
-        logger.info(" locationId: " + locationId + " sub: " + principal.getAttribute("sub"));
         userService.addFavoriteLocation(principal.getAttribute("sub"), locationId);
-        return "putLocation";
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.setLocation(ServletUriComponentsBuilder.fromCurrentRequest().replacePath("/home").build().toUri());
+        return new ResponseEntity<Void>(responseHeaders, HttpStatus.FOUND);
     }
 
     @DeleteMapping("/favoriteLocation/{locationId}")
-    public String deleteFavoriteLocation(@PathVariable String locationId, @AuthenticationPrincipal OAuth2User principal) {
+    public ResponseEntity deleteFavoriteLocation(@PathVariable String locationId, @AuthenticationPrincipal OAuth2User principal) {
+        logger.info("deleteFavoriteLocation called");
         userService.deleteFavoriteLocation(principal.getAttribute("sub"), locationId);
-        return "deleteLocation";
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.setLocation(ServletUriComponentsBuilder.fromCurrentRequest().replacePath("/home").build().toUri());
+        return new ResponseEntity<Void>(responseHeaders, HttpStatus.FOUND);
     }
 
     @GetMapping("/favoriteLocation")
     public List<Location> getFavoriteLocation(@AuthenticationPrincipal OAuth2User principal) {
         logger.info("getFavoriteLocation called");
-
         return userService.getFavoriteLocations(principal.getAttribute("sub"));
     }
 
-    @GetMapping("/report")
-    public String getReport() {
-        return "getReport";
+    @GetMapping("/locations")
+    public List<Location> getAllLocation() {
+        logger.info("getFavoriteLocation called");
+        return locationService.getAllLocations();
     }
 
-    @GetMapping("/location/{id}")
-    public AqhiResponse getLocation(@PathVariable String id) throws JsonProcessingException {
-        return locationService.getLocationInfo(id);
-    }
 }
