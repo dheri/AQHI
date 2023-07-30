@@ -36,13 +36,11 @@ class SecurityConfig {
                     csrf.ignoringRequestMatchers(toH2Console());
                     csrf.ignoringRequestMatchers("/api/**");
                 })
-
                 .oauth2Login(withDefaults())
                 .oauth2Client(withDefaults())
                 .sessionManagement((sessionManagement) -> sessionManagement
-                        .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
-                        .sessionConcurrency((sessionConcurrency) -> sessionConcurrency.maximumSessions(1).expiredUrl("/login?expired")))
-
+                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                )
                 .logout((l -> l.logoutSuccessUrl("/").permitAll()));
 
         return http.build();

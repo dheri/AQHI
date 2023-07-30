@@ -70,7 +70,7 @@ public class UserService {
     public AqhiUser deleteFavoriteLocation(String userId, String locationId) {
         AqhiUser user = getUser(userId);
         Location removedLocation = user.getFavoriteLocations().remove(locationId);
-        logger.info("removedLocation: "+ removedLocation);
+        logger.info("removedLocation: " + removedLocation);
 
         return aqhiUserRepository.save(user);
     }

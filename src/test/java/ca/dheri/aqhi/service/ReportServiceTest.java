@@ -40,6 +40,8 @@ class ReportServiceTest {
         System.out.println("getMaxStartIndex " + timeSeries.getMaxY());
         System.out.println("getMaxEndIndex " + timeSeries.getMinY());
         System.out.println("findValueRange " + timeSeries.findValueRange());
+        System.out.println("findValueRange getLowerBound " + timeSeries.findValueRange().getLowerBound());
+        System.out.println("findValueRange getUpperBound " + timeSeries.findValueRange().getUpperBound());
 
 
     }
