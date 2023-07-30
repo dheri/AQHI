@@ -1,12 +1,12 @@
 package ca.dheri.aqhi.model;
 
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 @Data
 @Entity
@@ -19,7 +19,7 @@ public class AqhiUser {
     private String lastName;
     private String email;
 
-    @ElementCollection
-    private Map<String, Location> favoriteLocations = new HashMap<String, Location>();
+    @ManyToMany
+    private Set<Location> favoriteLocations = new HashSet<>();
 
 }

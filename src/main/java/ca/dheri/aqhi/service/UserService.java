@@ -54,23 +54,21 @@ public class UserService {
 
     public List<Location> getFavoriteLocations(String userId) {
         AqhiUser user = getUser(userId);
-        return List.copyOf(user.getFavoriteLocations().values());
+        return List.copyOf(user.getFavoriteLocations().stream().toList());
     }
 
     public AqhiUser addFavoriteLocation(String userId, String locationId) {
         AqhiUser user = getUser(userId);
-        logger.info(user.toString());
-        logger.info(user.getFavoriteLocations().toString());
-        logger.info(locationRepository.findById(locationId).toString());
+        logger.info("addFavoriteLocation user: ", user.toString(), ", location: ", locationId);
 
-        user.getFavoriteLocations().put(locationId, locationRepository.findById(locationId).orElseThrow());
+        user.getFavoriteLocations().add(locationRepository.findById(locationId).orElseThrow());
         return aqhiUserRepository.save(user);
     }
 
     public AqhiUser deleteFavoriteLocation(String userId, String locationId) {
         AqhiUser user = getUser(userId);
-        Location removedLocation = user.getFavoriteLocations().remove(locationId);
-        logger.info("removedLocation: " + removedLocation);
+        boolean isRemoved = user.getFavoriteLocations().removeIf(l -> l.getId().equals(locationId));
+        logger.info("removed Location: ", locationId, " : ", isRemoved);
 
         return aqhiUserRepository.save(user);
     }

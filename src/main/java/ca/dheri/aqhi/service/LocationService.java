@@ -26,15 +26,13 @@ public class LocationService {
 
     @Autowired
     LocationRepository locationRepository;
-    public AqhiResponse getLocationAqhiTimeSeries(String locationID) throws JsonProcessingException {
+
+    public AqhiResponse getAqhiResponse(String locationID) throws JsonProcessingException {
         RestTemplate restTemplate = new RestTemplate();
         String aqhiForecastUrl = AQH_FORECAST_BASE_URL + "?location_id=" + locationID;
         ResponseEntity<String> response = restTemplate.getForEntity(aqhiForecastUrl, String.class);
-        logger.info(response.getStatusCode().toString());
         ObjectMapper objectMapper = new ObjectMapper();
         AqhiResponse aqhiResponse = objectMapper.readValue(response.getBody().toString(), AqhiResponse.class);
-        logger.info(aqhiResponse.getFeatures().get(0).getProperties().getLocation_name_en());
-        logger.info(String.valueOf(aqhiResponse.getFeatures().get(0).getProperties().getAqhi()));
         return aqhiResponse;
     }
 
@@ -42,7 +40,7 @@ public class LocationService {
         TimeSeries timeSeries = new TimeSeries(location.getName());
         AqhiResponse aqhiResponse = new AqhiResponse();
         try {
-            aqhiResponse= getLocationAqhiTimeSeries(location.getId());
+            aqhiResponse = getAqhiResponse(location.getId());
         } catch (Exception e) {
             logger.error(e.getLocalizedMessage());
         }

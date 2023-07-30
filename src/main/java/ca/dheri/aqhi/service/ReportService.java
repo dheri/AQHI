@@ -19,9 +19,10 @@ public class ReportService {
     LocationService locationService;
 
     public TimeSeriesCollection generateReport(AqhiUser user) {
+
         TimeSeriesCollection timeSeriesCollection = new TimeSeriesCollection();
 
-        user.getFavoriteLocations().values()
+        user.getFavoriteLocations()
                 .stream().parallel()
                 .peek(l -> {
                     timeSeriesCollection.addSeries(locationService.getLocationAqhiTimeSeries(l));
